@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import Theme from "./theme";
 import Login from "./components/pages/login";
@@ -19,6 +21,7 @@ const App = () => {
           <Route path="/edit" component={EditExpense} />
         </Switch>
       </BrowserRouter>
+      <ToastContainer autoClose={3000} hideProgressBar={true} newestOnTop={true} transition={Slide} theme="colored" />
     </Theme>
   );
 };

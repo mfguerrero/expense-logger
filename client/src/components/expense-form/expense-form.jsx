@@ -1,6 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { TextField, Button } from "@material-ui/core";
+import moment from "moment";
+import { toast } from "react-toastify";
+import { TextField, Button, InputAdornment } from "@material-ui/core";
+import MoneyIcon from "@material-ui/icons/AttachMoney";
 
 import SaveIcon from "@material-ui/icons/Save";
 import BackIcon from "@material-ui/icons/ArrowBack";
@@ -15,15 +18,31 @@ const ExpenseForm = ({ id }) => {
     history.push("/dashboard");
   };
 
+  const saveHandler = () => {
+    toast.warning("Capture all fields!");
+  };
+
   return (
     <form className={classes.form}>
       <TextField placeholder="Description" autoFocus className={classes.textField} variant="outlined" />
-      <TextField type="text" placeholder="Amount" className={classes.textField} variant="outlined" />
+      <TextField
+        type="text"
+        placeholder="Amount"
+        className={classes.textField}
+        variant="outlined"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <MoneyIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
       <TextField
         id="date"
         variant="outlined"
         type="date"
-        defaultValue="2017-05-24"
+        defaultValue={moment().format("YYYY-MM-DD")}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -31,6 +50,7 @@ const ExpenseForm = ({ id }) => {
       />
       <TextField
         multiline
+        rows={4}
         placeholder="Add a note for your expense (optional)"
         className={classes.textArea}
         variant="outlined"
@@ -45,7 +65,7 @@ const ExpenseForm = ({ id }) => {
               Remove
             </Button>
           )}
-          <Button variant="contained" color="primary" disableElevation startIcon={<SaveIcon />}>
+          <Button variant="contained" color="primary" disableElevation startIcon={<SaveIcon />} onClick={saveHandler}>
             Save
           </Button>
         </div>
