@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-function App() {
+import Theme from "./theme";
+import Login from "./components/pages/login";
+import Dashboard from "./components/pages/dashboard";
+import AddExpense from "./components/pages/add-expense";
+import EditExpense from "./components/pages/edit-expense";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Theme>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact={true} component={Login} />
+          <Route path="/dashboard" exact={true} component={Dashboard} />
+          <Route path="/create" component={AddExpense} />
+          <Route path="/edit" component={EditExpense} />
+        </Switch>
+      </BrowserRouter>
+    </Theme>
   );
-}
+};
 
 export default App;
