@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import moment from "moment";
 import { toast } from "react-toastify";
 import { TextField, Button, InputAdornment } from "@material-ui/core";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
@@ -42,7 +41,7 @@ const ExpenseForm = ({ id }) => {
         id="date"
         variant="outlined"
         type="date"
-        defaultValue={moment().format("YYYY-MM-DD")}
+        defaultValue="2021-09-01"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,

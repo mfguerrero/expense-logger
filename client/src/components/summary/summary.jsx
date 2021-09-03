@@ -1,13 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import numeral from "numeral";
 import Container from "../layout/container";
 import { useStyles } from "./summary.style";
 
-const Summary = ({ count, total }) => {
+import { summary } from "../../redux/expenses/selectors";
+
+const Summary = () => {
   const classes = useStyles();
   const history = useHistory();
+
+  const { count, total } = useSelector(summary);
+
   const formattedTotal = numeral(total / 100).format("$0,0.00");
 
   const addExpenseClickHandler = () => {

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, IconButton } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import LightIcon from "@material-ui/icons/Brightness7";
 import DarkIcon from "@material-ui/icons/Brightness4";
 import ExitIcon from "@material-ui/icons/ExitToApp";
@@ -9,11 +10,17 @@ import Container from "./container";
 import { useStyles } from "./header.style";
 import ExpenseIcon from "@material-ui/icons/Payment";
 import { DarkModeContext } from "../../theme/DarkModeContext";
+import { signOut } from "../../redux/auth/reducer";
 
 export const Header = () => {
   const classes = useStyles();
-  const history = useHistory();
+
+  const dispatch = useDispatch();
   const { prefersDarkMode, toggleTheme } = React.useContext(DarkModeContext);
+
+  const logoutHandler = () => {
+    dispatch(signOut());
+  };
 
   return (
     <header className={classes.root}>
@@ -25,12 +32,7 @@ export const Header = () => {
           </Link>
           <div className={classes.button}>
             <IconButton onClick={() => toggleTheme()}>{prefersDarkMode ? <LightIcon /> : <DarkIcon />}</IconButton>
-            <Button
-              onClick={() => {
-                history.push("/");
-              }}
-              startIcon={<ExitIcon />}
-            >
+            <Button onClick={logoutHandler} startIcon={<ExitIcon />}>
               Logout
             </Button>
           </div>

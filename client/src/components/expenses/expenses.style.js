@@ -17,6 +17,11 @@ export const useStyles = makeStyles((theme) =>
       padding: theme.spacing(1.2, 1.6),
     },
     body: {},
-    noitems: {},
+    noitems: {
+      padding: theme.spacing(3, 0),
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: "1.6rem",
+    },
   })
 );

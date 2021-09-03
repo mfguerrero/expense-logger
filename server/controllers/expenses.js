@@ -6,7 +6,7 @@ export const retrieveExpenses = async (req, res) => {
     const data = await getExpenses(req.user.id);
     return successResponse(res, data);
   } catch (error) {
-    return errorResponse(error);
+    return errorResponse(res, error);
   }
 };
 
@@ -15,7 +15,7 @@ export const retrieveExpense = async (req, res) => {
     const data = await getExpense(req.params.id);
     return successResponse(res, data);
   } catch (error) {
-    return errorResponse(error);
+    return errorResponse(res, error);
   }
 };
 
@@ -25,7 +25,7 @@ export const insertExpense = async (req, res) => {
     const data = await addExpense(req.user.id, description, amount, date, comments);
     return successResponse(res, data);
   } catch (error) {
-    return errorResponse(error);
+    return errorResponse(res, error);
   }
 };
 
@@ -35,7 +35,7 @@ export const editExpense = async (req, res) => {
     const data = await updateExpense(req.params.id, description, amount, date, comments);
     return successResponse(res, data);
   } catch (error) {
-    return errorResponse(error);
+    return errorResponse(res, error);
   }
 };
 
@@ -44,6 +44,6 @@ export const deleteExpense = async (req, res) => {
     const data = await removeExpense(req.params.id);
     return successResponse(res, data);
   } catch (error) {
-    return errorResponse(error);
+    return errorResponse(res, error);
   }
 };

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useStyles } from "./expenses.style";
 import Container from "../layout/container";
 import Expense from "../expense/expense";
+import Spinner from "../spinner/spinner";
+import { visibleExpenses } from "../../redux/expenses/selectors";
+import { loadExpenses } from "../../redux/expenses/reducer";
 
-const Expenses = ({ list }) => {
+const Expenses = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { loading, expenses } = useSelector(visibleExpenses);
+
+  useEffect(() => {
+    dispatch(loadExpenses());
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div>
       <Container>
@@ -14,15 +26,17 @@ const Expenses = ({ list }) => {
             <div>Amount</div>
           </div>
           <div className={classes.body}>
-            {list.length === 0 ? (
-              <div className={classes.noitems}>
-                <span>No expenses</span>
-              </div>
-            ) : (
-              list.map((expense) => {
-                return <Expense key={expense.id} {...expense} />;
-              })
-            )}
+            {loading && <Spinner />}
+            {!loading &&
+              (expenses.length === 0 ? (
+                <div className={classes.noitems}>
+                  <span>No Expenses</span>
+                </div>
+              ) : (
+                expenses.map((expense) => {
+                  return <Expense key={expense.id} {...expense} />;
+                })
+              ))}
           </div>
         </div>
       </Container>
